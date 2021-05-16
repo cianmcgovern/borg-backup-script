@@ -82,7 +82,7 @@ borg list 2>&1 | tee -a $LOG_FILE
 
 # List files in the archive
 ARCHIVE_FILES=$(mktemp)
-borg list --short ::${ARCHIVE_NAME} 2>&1 | gzip > ${ARCHIVE_FILES}
+borg list --short ::${ARCHIVE_NAME} 2>&1 | xz -9 -T0 > ${ARCHIVE_FILES}
 
 # use highest exit code as global exit code
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
