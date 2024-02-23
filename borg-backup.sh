@@ -102,7 +102,11 @@ fi
 # Step 6: Run backup
 ###
 if [ -n "${BORG_EMAIL}" ]; then
-    mailx -s "${email_subject}" -A ${ARCHIVE_FILES} "${BORG_EMAIL}" < ${LOG_FILE}
+    if [ -f '/usr/bin/mailx' ]; then
+        mailx -s "${email_subject}" -A ${ARCHIVE_FILES} "${BORG_EMAIL}" < ${LOG_FILE}
+    elif [ -f '/usr/bin/s-nail' ]; then
+        s-nail -s "${email_subject}" -a ${ARCHIVE_FILES} "${BORG_EMAIL}" < ${LOG_FILE}
+    fi
 fi
 
 # Cleanup
