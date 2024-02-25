@@ -1,0 +1,12 @@
+P sh
+R /
+! /dev
+! /media
+! /mnt
+! /proc
+! /run
+! /sys
+! /tmp
+! /var/cache
+! /var/lib/docker
+! /var/log/journal
