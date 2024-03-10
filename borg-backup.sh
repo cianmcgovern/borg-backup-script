@@ -66,6 +66,13 @@ borg prune                          \
 
 prune_exit=${PIPESTATUS[0]}
 
+# https://borgbackup.readthedocs.io/en/stable/usage/notes.html#separate-compaction
+# Borg 1.2 no longer compacts the repository automatically
+if [ ${prune_exit} -eq 0 ]; then
+    info "Compacting repository at ${BORG_REPO} to free up disk space"
+    borg compact 2>&1 | tee -a ${LOG_FILE}
+fi
+
 ###
 # Step 3: Display archive info
 ###
